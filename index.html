@@ -24,8 +24,13 @@
           <h5 class="card-title h2 text-success">Phone Arena</h5>
           <p class="card-text">Find Your Desired Phone Here</p>
           <div class="d-flex mx-auto">
-            <input class="form-control me-2" placeholder="Search A Phone" />
-            <button class="btn btn-outline-success" type="submit">
+            <input 
+            id="search-input"
+            class="form-control me-2" placeholder="Search A Phone" />
+            <button
+            id="search-btn" 
+            onclick="phoneSearch()"
+            class="btn btn-outline-success" type="submit">
               Search
             </button>
           </div>
