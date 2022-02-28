@@ -9,8 +9,6 @@ const phoneSearch = _ => {
         fetch(url)
         .then(response => response.json())
         .then(phones => {
-            console.log(phones.data);
-
             document.getElementById('display-total').innerText = `${phones.data.length} Phones Found`;
 
             const displayPhones = document.getElementById('display-phones');
@@ -36,8 +34,9 @@ const phoneSearch = _ => {
                             longer.
                             </p>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer d-flex justify-content-between">
                             <small class="text-muted">${phone.slug}</small>
+                            <button class="btn btn-outline-success">See Details</button>
                         </div>
                         </div>
                     </div>
