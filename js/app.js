@@ -58,7 +58,7 @@ const phoneSearch = _ => {
                                 <div class="card-footer">
                                     <div 
                                     class="text-primary"
-                                    onclick="displayPhoneDetails(${phone.phone_name})"
+                                    onclick="displayPhoneDetails('${phone.slug}')"
                                     >
                                     See Details</div>
                                 </div>
@@ -95,16 +95,22 @@ const phoneSearch = _ => {
 
 // display phone details
 const displayPhoneDetails = id => {
+    // display spinner 
+    document.getElementById('spinner').style.display = 'block';
 
-    console.log(id);
-    
+    // clear previous result
+    document.getElementById('display-phones').innerHTML = '';
+
+    // clear previous total
+    document.getElementById('display-total').innerHTML = '';
+
     try {
         const url = `https://openapi.programming-hero.com/api/phone/${id}`
 
         fetch(url)
         .then(response => response.json())
         .then(phone => {
-            // get display field id
+            // get phone details field id
             const phonesDetails = document.getElementById('phone-details');
             
             if(phone.status == true){
@@ -130,12 +136,6 @@ const displayPhoneDetails = id => {
                         <p class="card-text">Display: ${phone.data.mainFeatures.displaySize}</p>
                         <p class="card-text">Memory: ${phone.data.mainFeatures.memory}</p>
                         <p class="card-text">Storage: ${phone.data.mainFeatures.storage}</p>
-                        <p class="card-text">Bluetooth: ${phone.data.others.Bluetooth}</p>
-                        <p class="card-text">GPS: ${phone.data.others.GPS}</p>
-                        <p class="card-text">NFC: ${phone.data.others.NFC}</p>
-                        <p class="card-text">Radio: ${phone.data.others.Radio}</p>
-                        <p class="card-text">USB: ${phone.data.others.USB}</p>
-                        <p class="card-text">WLAN: ${phone.data.others.WLAN}</p>
                         <p class="card-text text-muted">${phone.data.releaseDate}</p>
                     </div>
                 </div>
