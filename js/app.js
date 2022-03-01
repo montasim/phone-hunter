@@ -226,11 +226,11 @@ const show20Result = (phones, displayPhones) => {
                     <h5 class="card-title text-muted"> ${phone?.brand}</h5>
                 </div>
                 <div class="card-footer">
-                    <div 
-                    class="text-primary"
+                    <button 
+                    class="btn alert-dark"
                     onclick="displayPhoneDetails('${phone?.slug}')"
                     >
-                    See Details</div>
+                    See Details</button>
                 </div>
                 </div>
             </div>
