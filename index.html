@@ -24,13 +24,17 @@
           <h5 class="card-title h2 text-success">Phone Arena</h5>
           <p class="card-text">Find Your Desired Phone Here</p>
           <div class="d-flex mx-auto">
-            <input 
-            id="search-input"
-            class="form-control me-2" placeholder="Search A Phone" />
+            <input
+              id="search-input"
+              class="form-control me-2"
+              placeholder="Search A Phone"
+            />
             <button
-            id="search-btn" 
-            onclick="phoneSearch()"
-            class="btn btn-outline-success" type="submit">
+              id="search-btn"
+              onclick="phoneSearch()"
+              class="btn btn-outline-success"
+              type="submit"
+            >
               Search
             </button>
           </div>
@@ -40,11 +44,14 @@
     </section>
 
     <main>
-      <sectio class="my-5">
-        <div id="display-phones" class="container row row-cols-1 row-cols-md-3 g-4 mx-auto">
-          
-        </div>
+      <section class="my-5">
+        <div
+          id="display-phones"
+          class="container row row-cols-1 row-cols-md-3 g-4 mx-auto"
+        ></div>
       </section>
+
+      <section id="phone-details"></section>
 
       <!-- spinner -->
       <section>
