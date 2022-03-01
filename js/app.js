@@ -4,7 +4,7 @@ const phoneSearch = _ => {
     document.getElementById('spinner').style.display = 'block';
 
     // get search input
-    const searchText = document.getElementById('search-input').value;
+    const searchText = document.getElementById('search-input').value.toLowerCase();
 
     if(searchText == ''){
         // hide spinner 
@@ -58,7 +58,7 @@ const phoneSearch = _ => {
                                 <div class="card-footer">
                                     <div 
                                     class="text-primary"
-                                    onclick="displayPhoneDetails(${phone.slug})"
+                                    onclick="displayPhoneDetails(${phone.phone_name})"
                                     >
                                     See Details</div>
                                 </div>
@@ -94,10 +94,12 @@ const phoneSearch = _ => {
 }
 
 // display phone details
-const displayPhoneDetails = _ => {
+const displayPhoneDetails = id => {
+
+    console.log(id);
     
     try {
-        const url = `https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089`
+        const url = `https://openapi.programming-hero.com/api/phone/${id}`
 
         fetch(url)
         .then(response => response.json())
@@ -117,27 +119,25 @@ const displayPhoneDetails = _ => {
                 // display each result
                 div.innerHTML = `
                 <div class="container mx-auto d-flex">
-                <img
-                  class=""
-                  src="${phone.data.image}"
-                  alt="Card image cap"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">${phone.data.name}</h5>
-                  <p class="card-text">Chipset: ${phone.data.mainFeatures.chipSet}</p>
-                  <p class="card-text">Display: ${phone.data.mainFeatures.displaySize}</p>
-                  <p class="card-text">Memory: ${phone.data.mainFeatures.memory}</p>
-                  <p class="card-text">Storage: ${phone.data.mainFeatures.storage}</p>
-                  <p class="card-text">Bluetooth: ${phone.data.others.Bluetooth}</p>
-                  <p class="card-text">GPS: ${phone.data.others.GPS}</p>
-                  <p class="card-text">NFC: ${phone.data.others.NFC}</p>
-                  <p class="card-text">Radio: ${phone.data.others.Radio}</p>
-                  <p class="card-text">USB: ${phone.data.others.USB}</p>
-                  <p class="card-text">WLAN: ${phone.data.others.WLAN}</p>
-                  <p class="card-text">
-                    <small class="text-muted">${phone.data.releaseDate}</small>
-                  </p>
-                </div>
+                    <img
+                    class=""
+                    src="${phone.data.image}"
+                    alt="Card image cap"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">${phone.data.name}</h5>
+                        <p class="card-text">Chipset: ${phone.data.mainFeatures.chipSet}</p>
+                        <p class="card-text">Display: ${phone.data.mainFeatures.displaySize}</p>
+                        <p class="card-text">Memory: ${phone.data.mainFeatures.memory}</p>
+                        <p class="card-text">Storage: ${phone.data.mainFeatures.storage}</p>
+                        <p class="card-text">Bluetooth: ${phone.data.others.Bluetooth}</p>
+                        <p class="card-text">GPS: ${phone.data.others.GPS}</p>
+                        <p class="card-text">NFC: ${phone.data.others.NFC}</p>
+                        <p class="card-text">Radio: ${phone.data.others.Radio}</p>
+                        <p class="card-text">USB: ${phone.data.others.USB}</p>
+                        <p class="card-text">WLAN: ${phone.data.others.WLAN}</p>
+                        <p class="card-text text-muted">${phone.data.releaseDate}</p>
+                    </div>
                 </div>
                         `
                         phonesDetails.appendChild(div);
