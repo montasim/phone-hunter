@@ -47,6 +47,10 @@ const displayPhone = searchText => {
 
                 show20Result(phones, displayPhones);
 
+                document.getElementById('show-all').addEventListener('click', function(){
+                    showAllResult(phones, displayPhones);
+                })  
+
                 // hide spinner 
                 displaySpinner(false);
             }
@@ -101,57 +105,57 @@ const displayPhoneDetails = id => {
 
                 // display each result
                 div.innerHTML = `
-                <div class="container">
-                  <div class="row mx-auto">
-                    <div class="col-sm-5">
-                      <img
-                        class="img-fluid w-75"
-                        src="${phone.data?.image}"
-                        alt="Card image cap"
-                      />
+                    <div class="container">
+                    <div class="row mx-auto">
+                        <div class="col-sm-5">
+                        <img
+                            class="img-fluid w-75"
+                            src="${phone.data?.image}"
+                            alt="Card image cap"
+                        />
+                        </div>
+                        <div class="col-sm-7 mt-5">
+                        <h3 class="h3">${phone.data?.name}</h3>
+                        <table class="table table-borderless">
+                            <tbody class="fs-6">
+                            <tr>
+                                <td>Brand:</td>
+                                <td>${phone.data?.brand}</td>
+                            </tr>
+                            <tr>
+                                <td>Chipset:</td>
+                                <td>${phone.data.mainFeatures?.chipSet}</td>
+                            </tr>
+                            <tr>
+                                <td>Sensors:</td>
+                                <td>${phone.data.mainFeatures?.sensors}</td>
+                            </tr>
+                            <tr>
+                                <td>Display:</td>
+                                <td>${phone.data.mainFeatures?.displaySize}</td>
+                            </tr>
+                            <tr>
+                                <td>Memory:</td>
+                                <td>${phone.data.mainFeatures?.memory}</td>
+                            </tr>
+                            <tr>
+                                <td>Storage:</td>
+                                <td>${phone.data.mainFeatures?.storage}</td>
+                            </tr>
+                            <tr>
+                                <td>Others:</td>
+                                <!-- optional chaining -->
+                                <td>Bluetooth ${phone.data.others?.Bluetooth == undefined? 'No data' : phone.data.others.Bluetooth}, GPS ${phone.data.others?.GPS == undefined? 'No data': phone.data.others.GPS}, NFC ${phone.data.others?.NFC == undefined? 'No Data' : phone.data.others.NFC}, Radio ${phone.data.others?.Radio == undefined? 'No Data' : phone.data.others.Radio}, USB ${phone.data.others?.USB == undefined? 'No Data' : phone.data.others.USB}, WLAN ${phone.data.others?.WLAN == undefined? 'No Data' : phone.data.others.WLAN} </td>
+                            </tr>
+                            <tr>
+                                <td>Release Date:</td>
+                                <td>${phone.data?.releaseDate == ''? 'No Release Date Found' : phone.data.releaseDate}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
                     </div>
-                    <div class="col-sm-7 mt-5">
-                      <h3 class="h3">${phone.data?.name}</h3>
-                      <table class="table table-borderless">
-                        <tbody class="fs-6">
-                          <tr>
-                            <td>Brand:</td>
-                            <td>${phone.data?.brand}</td>
-                          </tr>
-                          <tr>
-                            <td>Chipset:</td>
-                            <td>${phone.data.mainFeatures?.chipSet}</td>
-                          </tr>
-                          <tr>
-                            <td>Sensors:</td>
-                            <td>${phone.data.mainFeatures?.sensors}</td>
-                          </tr>
-                          <tr>
-                            <td>Display:</td>
-                            <td>${phone.data.mainFeatures?.displaySize}</td>
-                          </tr>
-                          <tr>
-                            <td>Memory:</td>
-                            <td>${phone.data.mainFeatures?.memory}</td>
-                          </tr>
-                          <tr>
-                            <td>Storage:</td>
-                            <td>${phone.data.mainFeatures?.storage}</td>
-                          </tr>
-                          <tr>
-                            <td>Others:</td>
-                            <!-- optional chaining -->
-                            <td>Bluetooth ${phone.data.others?.Bluetooth == undefined? 'No data' : phone.data.others.Bluetooth}, GPS ${phone.data.others?.GPS == undefined? 'No data': phone.data.others.GPS}, NFC ${phone.data.others?.NFC == undefined? 'No Data' : phone.data.others.NFC}, Radio ${phone.data.others?.Radio == undefined? 'No Data' : phone.data.others.Radio}, USB ${phone.data.others?.USB == undefined? 'No Data' : phone.data.others.USB}, WLAN ${phone.data.others?.WLAN == undefined? 'No Data' : phone.data.others.WLAN} </td>
-                          </tr>
-                          <tr>
-                            <td>Release Date:</td>
-                            <td>${phone.data?.releaseDate == ''? 'No Release Date Found' : phone.data.releaseDate}</td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
-                  </div>
-                </div>
                         `
                         phonesDetails.appendChild(div);
 
@@ -242,6 +246,12 @@ const show20Result = (phones, displayPhones) => {
 
 // show all result
 const showAllResult = (phones, displayPhones) => {
+    // display spinner 
+    document.getElementById('spinner').style.display = 'block';
+
+   // clear previous result
+    clearPreviousResult('display-phones');
+
     // seperate each phone
     phones.data.forEach(phone => {
         // create a div
@@ -269,4 +279,6 @@ const showAllResult = (phones, displayPhones) => {
         // append div to display
         displayPhones.appendChild(div);
     });
+    // hide spinner 
+    document.getElementById('spinner').style.display = 'none';
 }
