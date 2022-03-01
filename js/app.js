@@ -3,11 +3,11 @@ const phoneSearch = _ => {
     // display spinner 
     displaySpinner(true);
 
-    // get search input
+    // get search input into lower case
     const searchText = document.getElementById('search-input').value.toLowerCase();
 
     if(searchText == ''){
-        // display no data
+        // display error message
         document.getElementById('display-total').innerHTML = `
         <div class="alert alert-danger" role="alert">
             Search Field is Empty!
@@ -26,7 +26,8 @@ const phoneSearch = _ => {
                 
                 if(phones.status == true){
                     // clear previous result
-                    displayPhones.innerHTML = '';
+                    clearPreviousResult('display-phones');
+                    clearPreviousResult('phone-details');
     
                     // display total result
                     document.getElementById('display-total').innerHTML = `
@@ -70,6 +71,7 @@ const phoneSearch = _ => {
                 else{
                     // clear previous data
                     displayPhones.innerHTML = '';
+                    clearPreviousResult('display-phones');
     
                     // display no data
                     document.getElementById('display-total').innerHTML = `
@@ -95,12 +97,6 @@ const displayPhoneDetails = id => {
     // display spinner 
     displaySpinner(true);
 
-    // clear previous result
-    document.getElementById('display-phones').innerHTML = '';
-
-    // clear previous total
-    document.getElementById('display-total').innerHTML = '';
-
     try {
         const url = `https://openapi.programming-hero.com/api/phone/${id}`
 
@@ -112,7 +108,9 @@ const displayPhoneDetails = id => {
             
             if(phone.status == true){
                 // clear previous result
-                phonesDetails.innerHTML = '';
+                clearPreviousResult('display-phones');
+                clearPreviousResult('phone-details');
+                clearPreviousResult('display-total');
 
                 // create a div
                 const div = document.createElement('div');
@@ -144,7 +142,7 @@ const displayPhoneDetails = id => {
             }
             else{
                 // clear previous data
-                displayPhones.innerHTML = '';
+                clearPreviousResult('phone-details')
 
                 // display no data
                 document.getElementById('display-total').innerHTML = `
@@ -164,13 +162,13 @@ const displayPhoneDetails = id => {
     }
 }
 
-// while pressing enter
+// search while pressing enter
 var input = document.getElementById('search-input');
 input.addEventListener('keyup', function (event) {
-if (event.keyCode === 13) {
-        event.preventDefault();
-        document.getElementById('search-btn').click();
-    }
+    if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById('search-btn').click();
+        }
 });
 
 // display or hide spinner
@@ -181,4 +179,9 @@ const displaySpinner = isTrue => {
     else{  
         document.getElementById('spinner').style.display = 'none';
     }
+}
+
+// clear result 
+const clearPreviousResult = id => {
+    document.getElementById(id).innerHTML = '';
 }
