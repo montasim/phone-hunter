@@ -51,9 +51,11 @@ const phoneSearch = _ => {
                                 longer.
                                 </p>
                             </div>
-                            <div class="card-footer d-flex justify-content-between">
+                            <div class="card-footer">
                                 <small class="text-muted">${phone.slug}</small>
-                                <button class="btn btn-outline-success">See Details</button>
+                                <br>
+                                <a class="" 
+                                onclick="displayDetails(${phone.slug})">See Details</a>
                             </div>
                             </div>
                         </div>
@@ -73,7 +75,7 @@ const phoneSearch = _ => {
                     No Data Found!
                 </div>
                 `
-                
+
                 // hide spinner 
                 document.getElementById('spinner').style.display = 'none';
             }
@@ -84,3 +86,33 @@ const phoneSearch = _ => {
         console.log('API Error!');
     }
 }
+
+// display details
+const displayDetails = id => {
+    try {
+        // display spinner 
+        document.getElementById('spinner').style.display = 'block';
+
+        // clear previous data
+        displayPhones.innerHTML = '';
+
+        // get display field id
+        const displayPhones = document.getElementById('display-phones');
+
+        const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+
+        console.log(url);
+
+    } catch (error) {
+        console.log('API Error!');
+    }
+}
+
+// while pressing enter
+var input = document.getElementById('search-input');
+input.addEventListener('keyup', function (event) {
+if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('search-btn').click();
+    }
+});
