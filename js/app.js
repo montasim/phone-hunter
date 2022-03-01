@@ -13,6 +13,8 @@ const phoneSearch = _ => {
             Search Field is Empty!
         </div>
         `
+        // hide spinner 
+        displaySpinner(false);
     }
     else{
         displayPhone(searchText);
@@ -40,40 +42,11 @@ const displayPhone = searchText => {
                 document.getElementById('display-total').innerHTML = `
                 <div class="alert alert-success" role="alert">
                     ${phones.data.length} Phones Found
-                </div>`;
+                </div>
+                `;
 
-                // seperate each phone
-                phones.data.forEach(phone => {
-                    // create a div
-                    const div = document.createElement('div');
+                show20Result(phones, displayPhones);
 
-                    // display each result
-                    div.innerHTML = `
-                        <div  class="col">
-                            <div class="card h-100">
-                            <img src="${phone?.image}" class="image-fluid card-img-top p-3" alt="${phone?.phone_name} image" />
-                            <div class="card-body">
-                                <h3 class="card-title">${phone?.phone_name}</h3>
-                                <h5 class="card-title text-muted">${phone?.brand}</h5>
-                                <p class="card-text">
-                                Phone This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit
-                                longer.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <div 
-                                class="text-primary"
-                                onclick="displayPhoneDetails('${phone?.slug}')"
-                                >
-                                See Details</div>
-                            </div>
-                            </div>
-                        </div>
-                        `
-                    // append div to display
-                    displayPhones.appendChild(div);
-                });
                 // hide spinner 
                 displaySpinner(false);
             }
@@ -235,4 +208,76 @@ const clearPreviousResult = id => {
 // check empty node
 const checkEmptyNode = node => {
     node == undefined? 'No data' : node;
+}
+
+// show 20 result
+const show20Result = (phones, displayPhones) => {
+    // seperate each phone
+    phones.data.slice(0, 20).forEach(phone => {
+        // create a div
+        const div = document.createElement('div');
+
+        // display each result
+        div.innerHTML = `
+            <div  class="col">
+                <div class="card h-100">
+                <img src="${phone?.image}" class="image-fluid card-img-top p-3" alt="${phone?.phone_name} image" />
+                <div class="card-body">
+                    <h3 class="card-title">${phone?.phone_name}</h3>
+                    <h5 class="card-title text-muted">${phone?.brand}</h5>
+                    <p class="card-text">
+                    Phone This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div 
+                    class="text-primary"
+                    onclick="displayPhoneDetails('${phone?.slug}')"
+                    >
+                    See Details</div>
+                </div>
+                </div>
+            </div>
+            `
+        // append div to display
+        displayPhones.appendChild(div);
+    });
+}
+
+// show all result
+const showAllResult = (phones, displayPhones) => {
+    // seperate each phone
+    phones.data.forEach(phone => {
+        // create a div
+        const div = document.createElement('div');
+
+        // display each result
+        div.innerHTML = `
+            <div  class="col">
+                <div class="card h-100">
+                <img src="${phone?.image}" class="image-fluid card-img-top p-3" alt="${phone?.phone_name} image" />
+                <div class="card-body">
+                    <h3 class="card-title">${phone?.phone_name}</h3>
+                    <h5 class="card-title text-muted">${phone?.brand}</h5>
+                    <p class="card-text">
+                    Phone This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div 
+                    class="text-primary"
+                    onclick="displayPhoneDetails('${phone?.slug}')"
+                    >
+                    See Details</div>
+                </div>
+                </div>
+            </div>
+            `
+        // append div to display
+        displayPhones.appendChild(div);
+    });
 }
