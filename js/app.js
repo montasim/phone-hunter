@@ -1,15 +1,12 @@
 // on click search this function works
 const phoneSearch = _ => {
     // display spinner 
-    document.getElementById('spinner').style.display = 'block';
+    displaySpinner(true);
 
     // get search input
     const searchText = document.getElementById('search-input').value.toLowerCase();
 
     if(searchText == ''){
-        // hide spinner 
-        document.getElementById('spinner').style.display = 'none';
-
         // display no data
         document.getElementById('display-total').innerHTML = `
         <div class="alert alert-danger" role="alert">
@@ -68,7 +65,7 @@ const phoneSearch = _ => {
                         displayPhones.appendChild(div);
                     });
                     // hide spinner 
-                    document.getElementById('spinner').style.display = 'none';
+                    displaySpinner(false);
                 }
                 else{
                     // clear previous data
@@ -80,9 +77,9 @@ const phoneSearch = _ => {
                         No Data Found!
                     </div>
                     `
-    
+
                     // hide spinner 
-                    document.getElementById('spinner').style.display = 'none';
+                    displaySpinner(false);
                 }
             })
         } 
@@ -96,7 +93,7 @@ const phoneSearch = _ => {
 // display phone details
 const displayPhoneDetails = id => {
     // display spinner 
-    document.getElementById('spinner').style.display = 'block';
+    displaySpinner(true);
 
     // clear previous result
     document.getElementById('display-phones').innerHTML = '';
@@ -143,7 +140,7 @@ const displayPhoneDetails = id => {
                         phonesDetails.appendChild(div);
 
                 // hide spinner 
-                document.getElementById('spinner').style.display = 'none';
+                displaySpinner(false);
             }
             else{
                 // clear previous data
@@ -175,3 +172,13 @@ if (event.keyCode === 13) {
         document.getElementById('search-btn').click();
     }
 });
+
+// display or hide spinner
+const displaySpinner = isTrue => {
+    if(isTrue){  
+        document.getElementById('spinner').style.display = 'block';
+    }
+    else{  
+        document.getElementById('spinner').style.display = 'none';
+    }
+}
