@@ -45,8 +45,13 @@ const displayPhone = searchText => {
                 </div>
                 `;
 
+                // display show all button
+                document.getElementById('show-all').style.display = 'block';
+
+                // initially display 20 phones
                 show20Result(phones, displayPhones);
 
+                // display all phones when clicking show all
                 document.getElementById('show-all').addEventListener('click', function(){
                     showAllResult(phones, displayPhones);
                 })  
@@ -100,8 +105,6 @@ const displayPhoneDetails = id => {
 
                 // create a div
                 const div = document.createElement('div');
-
-                console.log(phone.data);
 
                 // display each result
                 div.innerHTML = `

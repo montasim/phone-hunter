@@ -6,6 +6,11 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* initially hide show all button */
+#show-all {
+  display: none;
+}
+
 /* by default spinner is hidden */
 #spinner {
   display: none;
