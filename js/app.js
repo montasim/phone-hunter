@@ -51,10 +51,10 @@ const displayPhone = searchText => {
                     div.innerHTML = `
                         <div  class="col">
                             <div class="card h-100">
-                            <img src="${phone.image}" class="image-fluid card-img-top p-3" alt="${phone.phone_name} image" />
+                            <img src="${phone?.image}" class="image-fluid card-img-top p-3" alt="${phone?.phone_name} image" />
                             <div class="card-body">
-                                <h3 class="card-title">${phone.phone_name}</h3>
-                                <h5 class="card-title text-muted">${phone.brand}</h5>
+                                <h3 class="card-title">${phone?.phone_name}</h3>
+                                <h5 class="card-title text-muted">${phone?.brand}</h5>
                                 <p class="card-text">
                                 Phone This is a wider card with supporting text below as a natural
                                 lead-in to additional content. This content is a little bit
@@ -64,7 +64,7 @@ const displayPhone = searchText => {
                             <div class="card-footer">
                                 <div 
                                 class="text-primary"
-                                onclick="displayPhoneDetails('${phone.slug}')"
+                                onclick="displayPhoneDetails('${phone?.slug}')"
                                 >
                                 See Details</div>
                             </div>
@@ -134,33 +134,42 @@ const displayPhoneDetails = id => {
                     <div class="col-sm-5">
                       <img
                         class="img-fluid w-75"
-                        src="${phone.data.image}"
+                        src="${phone.data?.image}"
                         alt="Card image cap"
                       />
                     </div>
                     <div class="col-sm-7 mt-5">
-                      <h3 class="h3">${phone.data.name}</h3>
+                      <h3 class="h3">${phone.data?.name}</h3>
                       <table class="table table-borderless">
                         <tbody class="fs-6">
                           <tr>
                             <td>Brand:</td>
-                            <td>${phone.data.brand}</td>
+                            <td>${phone.data?.brand}</td>
                           </tr>
                           <tr>
                             <td>Chipset:</td>
-                            <td>${phone.data.mainFeatures.chipSet}</td>
+                            <td>${phone.data.mainFeatures?.chipSet}</td>
+                          </tr>
+                          <tr>
+                            <td>Sensors:</td>
+                            <td>${phone.data.mainFeatures?.sensors}</td>
                           </tr>
                           <tr>
                             <td>Display:</td>
-                            <td>${phone.data.mainFeatures.displaySize}</td>
+                            <td>${phone.data.mainFeatures?.displaySize}</td>
                           </tr>
                           <tr>
                             <td>Memory:</td>
-                            <td>${phone.data.mainFeatures.memory}</td>
+                            <td>${phone.data.mainFeatures?.memory}</td>
                           </tr>
                           <tr>
                             <td>Storage:</td>
-                            <td>${phone.data.mainFeatures.storage}</td>
+                            <td>${phone.data.mainFeatures?.storage}</td>
+                          </tr>
+                          <tr>
+                            <td>Others:</td>
+                            <!-- optional chaining -->
+                            <td>Bluetooth ${phone.data.others?.Bluetooth == undefined? 'No data' : phone.data.others.Bluetooth}, GPS ${phone.data.others?.GPS == undefined? 'No data': phone.data.others.GPS}, NFC ${phone.data.others?.NFC == undefined? 'No Data' : phone.data.others.NFC}, Radio ${phone.data.others?.Radio == undefined? 'No Data' : phone.data.others.Radio}, USB ${phone.data.others?.USB == undefined? 'No Data' : phone.data.others.USB}, WLAN ${phone.data.others?.WLAN == undefined? 'No Data' : phone.data.others.WLAN} </td>
                           </tr>
                           <tr>
                             <td>Release Date:</td>
@@ -221,4 +230,9 @@ const displaySpinner = isTrue => {
 // clear result 
 const clearPreviousResult = id => {
     document.getElementById(id).innerHTML = '';
+}
+
+// check empty node
+const checkEmptyNode = node => {
+    node == undefined? 'No data' : node;
 }
