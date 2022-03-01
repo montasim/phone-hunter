@@ -1,5 +1,7 @@
 // on click search this function works
 const phoneSearch = _ => {
+    // display spinner 
+    document.getElementById('spinner').style.display = 'block';
     // get search input
     const searchText = document.getElementById('search-input').value;
 
@@ -58,6 +60,8 @@ const phoneSearch = _ => {
                         `
                     displayPhones.appendChild(div);
                 });
+                // hide spinner 
+                document.getElementById('spinner').style.display = 'none';
             }
             else{
                 // clear previous data
@@ -69,6 +73,9 @@ const phoneSearch = _ => {
                     No Data Found!
                 </div>
                 `
+                
+                // hide spinner 
+                document.getElementById('spinner').style.display = 'none';
             }
         })
     } 
