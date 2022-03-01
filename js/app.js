@@ -146,7 +146,7 @@ const displayPhoneDetails = id => {
                           </tr>
                           <tr>
                             <td>Release Date:</td>
-                            <td>${phone.data.releaseDate}</td>
+                            <td>${phone.data?.releaseDate == ''? 'No Release Date Found' : phone.data.releaseDate}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -223,13 +223,8 @@ const show20Result = (phones, displayPhones) => {
                 <div class="card h-100">
                 <img src="${phone?.image}" class="image-fluid card-img-top p-3" alt="${phone?.phone_name} image" />
                 <div class="card-body">
-                    <h3 class="card-title">${phone?.phone_name}</h3>
-                    <h5 class="card-title text-muted">${phone?.brand}</h5>
-                    <p class="card-text">
-                    Phone This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                    </p>
+                    <h3 class="card-title"> ${phone?.phone_name}</h3>
+                    <h5 class="card-title text-muted"> ${phone?.brand}</h5>
                 </div>
                 <div class="card-footer">
                     <div 
