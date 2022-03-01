@@ -91,7 +91,6 @@ const displayPhoneDetails = id => {
             
             if(phone.status == true){
                 // clear previous result
-                clearPreviousResult('display-phones');
                 clearPreviousResult('phone-details');
                 clearPreviousResult('display-total');
 
